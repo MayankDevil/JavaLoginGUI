@@ -13,6 +13,9 @@ class App extends javax.swing.JFrame implements java.awt.event.ActionListener
     
     private static java.util.HashMap<String,String> login_data  = new java.util.HashMap<String,String>();
     
+    final String ldanger = "#FF9898", danger = "#FF4545", lsuccess = "#C4FF8C", success = "#4E9A06";
+    
+    
     /*
         ---------------
         | constructor |
@@ -40,38 +43,15 @@ class App extends javax.swing.JFrame implements java.awt.event.ActionListener
             center_panel.setBackground(java.awt.Color.white);
             
             
-                username_label = new javax.swing.JLabel("Enter Username :");
-                
-                username_label.setBounds(50,20,200,30);               
-                
-                username_field = new javax.swing.JTextField();
-                
-                username_field.setBounds(50,60,200,30);
-                
-                password_label = new javax.swing.JLabel("Enter Password :");
-                
-                password_label.setBounds(50,110,200,30);
-                
-                password_field = new javax.swing.JPasswordField();
-                
-                password_field.setBounds(50,150,200,30);
+                inputLayout();
                 
                 
-                login_button = new javax.swing.JButton("Login");
-                
-                login_button.setBounds(50,220,100,30);
-                
-                login_button.setFocusable(false);
-                
-                login_button.setBackground(java.awt.Color.white);
-                
-                login_button.addActionListener(this);
+                buttonLayout();
                 
                 
                 verified_label = new javax.swing.JLabel();
                 
                 verified_label.setBounds(50,270,200,30);
-                
                 
             
             center_panel.add(username_label);
@@ -88,6 +68,48 @@ class App extends javax.swing.JFrame implements java.awt.event.ActionListener
             
         this.add(center_panel);   
     }
+    
+    void setAlertStyle()
+    {
+        verified_label.setForeground(java.awt.Color.decode(danger));
+                
+        verified_label.setBackground(java.awt.Color.decode(ldanger));
+        
+        verified_label.setOpaque(true);
+    }
+    
+    void inputLayout()
+    {
+        username_label = new javax.swing.JLabel("Enter Username :");
+                
+        username_label.setBounds(50,20,200,30);               
+        
+        username_field = new javax.swing.JTextField();
+        
+        username_field.setBounds(50,60,200,30);
+        
+        password_label = new javax.swing.JLabel("Enter Password :");
+        
+        password_label.setBounds(50,110,200,30);
+        
+        password_field = new javax.swing.JPasswordField();
+        
+        password_field.setBounds(50,150,200,30);
+    }
+    
+    void buttonLayout()
+    {
+        login_button = new javax.swing.JButton("Login");
+                
+        login_button.setBounds(50,220,100,30);
+        
+        login_button.setFocusable(false);
+        
+        login_button.setBackground(java.awt.Color.white);
+        
+        login_button.addActionListener(this);
+    }
+    
     
     /* @override : actionListener method */
     
@@ -107,12 +129,16 @@ class App extends javax.swing.JFrame implements java.awt.event.ActionListener
             if (user == "")
             {
                 verified_label.setText("Empty _Username_");
+                
+                setAlertStyle();
             }
             else
             {
                 if (password == "")
                 {
                     verified_label.setText("Empty _Password_");
+                    
+                    setAlertStyle();
                 }
                 else
                 {
