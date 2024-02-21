@@ -1,3 +1,9 @@
+/*
+*   JavaLoginGUI
+*   Developed by Mayank
+*   Copyright by https://github.com/MayankDevil/
+*   ./src/App.java
+*/
 
 class App extends javax.swing.JFrame implements java.awt.event.ActionListener
 {
@@ -13,7 +19,7 @@ class App extends javax.swing.JFrame implements java.awt.event.ActionListener
     
     private static java.util.HashMap<String,String> login_data  = new java.util.HashMap<String,String>();
     
-    final String ldanger = "#FF9898", danger = "#FF4545", lsuccess = "#C4FF8C", success = "#4E9A06";
+    final String ldanger = "#f8d7da", danger = "#721c24", lsuccess = "#d4edda", success = "#155724";
     
     
     /*
@@ -42,17 +48,11 @@ class App extends javax.swing.JFrame implements java.awt.event.ActionListener
             
             center_panel.setBackground(java.awt.Color.white);
             
-            
                 inputLayout();
-                
                 
                 buttonLayout();
                 
-                
-                verified_label = new javax.swing.JLabel();
-                
-                verified_label.setBounds(50,270,200,30);
-                
+                verificationLayout();
             
             center_panel.add(username_label);
             
@@ -69,99 +69,50 @@ class App extends javax.swing.JFrame implements java.awt.event.ActionListener
         this.add(center_panel);   
     }
     
-    void setAlertStyle()
-    {
-        verified_label.setForeground(java.awt.Color.decode(danger));
-                
-        verified_label.setBackground(java.awt.Color.decode(ldanger));
-        
-        verified_label.setOpaque(true);
-    }
+    /*
+        ------------------------------------------------------
+        | inputLayout function : set input fields and labels |
+        ------------------------------------------------------
+    */
     
     void inputLayout()
     {
         username_label = new javax.swing.JLabel("Enter Username :");
                 
-        username_label.setBounds(50,20,200,30);               
+        username_label.setBounds(100,20,300,30);               
         
         username_field = new javax.swing.JTextField();
         
-        username_field.setBounds(50,60,200,30);
+        username_field.setBounds(100,60,300,30);
         
         password_label = new javax.swing.JLabel("Enter Password :");
         
-        password_label.setBounds(50,110,200,30);
+        password_label.setBounds(100,110,300,30);
         
         password_field = new javax.swing.JPasswordField();
         
-        password_field.setBounds(50,150,200,30);
+        password_field.setBounds(100,150,300,30);
     }
+    
+    /*
+        ---------------------------------------------------------
+        | buttonLayout function : set button and Event Listener |
+        ---------------------------------------------------------
+    */
     
     void buttonLayout()
     {
         login_button = new javax.swing.JButton("Login");
                 
-        login_button.setBounds(50,220,100,30);
+        login_button.setBounds(100,220,100,30);
         
         login_button.setFocusable(false);
         
-        login_button.setBackground(java.awt.Color.white);
+        login_button.setForeground(java.awt.Color.decode("#ffffff"));
+        
+        login_button.setBackground(java.awt.Color.decode("#0069d9"));
         
         login_button.addActionListener(this);
-    }
-    
-    
-    /* @override : actionListener method */
-    
-    public void actionPerformed(java.awt.event.ActionEvent event)
-    {
-    
-        if (event.getSource() == login_button)
-        {
-            String user = username_field.getText();
-            
-            String password = String.valueOf(password_field.getPassword());
-            
-            System.out.println(" username is "+user);
-            
-            verified_label.setText("");
-            
-            if (user == "")
-            {
-                verified_label.setText("Empty _Username_");
-                
-                setAlertStyle();
-            }
-            else
-            {
-                if (password == "")
-                {
-                    verified_label.setText("Empty _Password_");
-                    
-                    setAlertStyle();
-                }
-                else
-                {
-                    if (login_data.containsKey(user))
-                    {
-                        if (login_data.get(user).equals(password))
-                        {
-                            verified_label.setText("SuccessFully Login");
-                            
-                            // this.dispose();
-                        }
-                        else
-                        {
-                            verified_label.setText("Unvalid _Password_");
-                        }
-                    }
-                    else
-                    {
-                        verified_label.setText("Unvalid _Username_");
-                    }
-                }
-            }            
-        }
     }
     
     /*
@@ -176,6 +127,78 @@ class App extends javax.swing.JFrame implements java.awt.event.ActionListener
     }   
     
     /*
+        -----------------------------------------------------------------
+        | verificationLayout function : set verified label and property |
+        -----------------------------------------------------------------
+    */
+    
+    void verificationLayout()
+    {
+        verified_label = new javax.swing.JLabel();
+                
+        verified_label.setBounds(100,270,300,30);
+        
+        verified_label.setText("");
+        
+        verified_label.setBackground(java.awt.Color.decode("#ffffff"));
+        
+        verified_label.setOpaque(true);
+    }
+    
+    /*
+        =====================================
+        | @override : actionListener method |
+        =====================================
+    */
+    
+    public void actionPerformed(java.awt.event.ActionEvent event)
+    {
+    
+        if (event.getSource() == login_button)
+        {
+            String user = username_field.getText();
+            
+            String password = String.valueOf(password_field.getPassword());
+            
+            if (user.isEmpty() || password.isEmpty())
+            {
+                verified_label.setText("_Empty Field_");
+                
+                verified_label.setForeground(java.awt.Color.decode(danger));
+                
+                verified_label.setBackground(java.awt.Color.decode(ldanger));
+            }
+            else if (!(login_data.containsKey(user)))
+            {
+                verified_label.setText("Unvalid _Username_");
+                
+                verified_label.setForeground(java.awt.Color.decode(danger));
+                
+                verified_label.setBackground(java.awt.Color.decode(ldanger));
+            }
+            else if (login_data.get(user).equals(password))
+            {
+                verified_label.setText("SuccessFully Login");
+                
+                verified_label.setForeground(java.awt.Color.decode(success));
+                
+                verified_label.setBackground(java.awt.Color.decode(lsuccess));
+                
+                // this.dispose();
+            }
+            else
+            {
+                verified_label.setText("Unvalid _Password_");
+                
+                verified_label.setForeground(java.awt.Color.decode(danger));
+                
+                verified_label.setBackground(java.awt.Color.decode(ldanger));
+            }      
+        }
+        System.out.println("_[ logined ]");
+    }
+    
+    /*
         ================
         [ main execute ]
         ================
@@ -188,3 +211,4 @@ class App extends javax.swing.JFrame implements java.awt.event.ActionListener
         new App(admin.security());
     }
 }
+/* the end */
