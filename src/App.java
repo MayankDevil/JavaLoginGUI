@@ -19,7 +19,7 @@ class App extends javax.swing.JFrame implements java.awt.event.ActionListener
     
     private static java.util.HashMap<String,String> login_data  = new java.util.HashMap<String,String>();
     
-    final String ldanger = "#f8d7da", danger = "#721c24", lsuccess = "#d4edda", success = "#155724";
+    final String ldanger = "#f8d7da", danger = "#721c24", lsuccess = "#d4edda", success = "#155724", primary = "#007bff", border_focus = "#80bdff", secondary = "#6c757d";
     
     
     /*
@@ -70,6 +70,29 @@ class App extends javax.swing.JFrame implements java.awt.event.ActionListener
     }
     
     /*
+        -----------------------------------------------------------------------
+        | myFont function : set Font get argument size and return font object |
+        -----------------------------------------------------------------------
+    */
+    
+    java.awt.Font myFont(int style, int size)
+    { 
+        if (style == 1)
+        {
+            style = java.awt.Font.ITALIC;
+        }
+        else if (style == 2)
+        {
+            style = java.awt.Font.BOLD;
+        }
+        else
+        {
+            style = java.awt.Font.PLAIN;
+        }            
+        return new java.awt.Font("-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans,Liberation Sans, sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji",style,size);
+    } 
+    
+    /*
         ------------------------------------------------------
         | inputLayout function : set input fields and labels |
         ------------------------------------------------------
@@ -79,19 +102,27 @@ class App extends javax.swing.JFrame implements java.awt.event.ActionListener
     {
         username_label = new javax.swing.JLabel("Enter Username :");
                 
-        username_label.setBounds(100,20,300,30);               
+        username_label.setBounds(100,20,300,30);
+        
+        username_label.setFont(myFont(3,14));               
         
         username_field = new javax.swing.JTextField();
         
         username_field.setBounds(100,60,300,30);
         
+        username_field.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.decode(border_focus),3));
+        
         password_label = new javax.swing.JLabel("Enter Password :");
         
         password_label.setBounds(100,110,300,30);
         
+        password_label.setFont(myFont(3,14));
+        
         password_field = new javax.swing.JPasswordField();
         
         password_field.setBounds(100,150,300,30);
+        
+        password_field.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.decode(border_focus),3));
     }
     
     /*
@@ -106,26 +137,19 @@ class App extends javax.swing.JFrame implements java.awt.event.ActionListener
                 
         login_button.setBounds(100,220,100,30);
         
+        login_button.setFont(myFont(2,14));
+        
         login_button.setFocusable(false);
         
         login_button.setForeground(java.awt.Color.decode("#ffffff"));
         
-        login_button.setBackground(java.awt.Color.decode("#0069d9"));
+        login_button.setBackground(java.awt.Color.decode(primary));
+        
+        login_button.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.decode("#0062cc"),2));
         
         login_button.addActionListener(this);
     }
-    
-    /*
-        -----------------------------------------------------------------------
-        | myFont function : set Font get argument size and return font object |
-        -----------------------------------------------------------------------
-    */
-    
-    java.awt.Font myFont(int size)
-    {
-        return new java.awt.Font("Arial",20,size);
-    }   
-    
+
     /*
         -----------------------------------------------------------------
         | verificationLayout function : set verified label and property |
@@ -136,9 +160,15 @@ class App extends javax.swing.JFrame implements java.awt.event.ActionListener
     {
         verified_label = new javax.swing.JLabel();
                 
-        verified_label.setBounds(100,270,300,30);
+        verified_label.setBounds(100,270,300,50);
         
         verified_label.setText("");
+        
+        verified_label.setFont(myFont(1,12));
+        
+        verified_label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        
+        verified_label.setVerticalAlignment(javax.swing.SwingConstants.CENTER);
         
         verified_label.setBackground(java.awt.Color.decode("#ffffff"));
         
