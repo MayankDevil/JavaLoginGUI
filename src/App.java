@@ -7,9 +7,9 @@
 
 class App extends javax.swing.JFrame implements java.awt.event.ActionListener
 {
-    private javax.swing.JPanel center_panel;
+    private javax.swing.JPanel header_panel, center_panel, footer_panel;
     
-    private javax.swing.JLabel username_label, password_label, verified_label;
+    private javax.swing.JLabel username_label, password_label, verified_label, title_label, subtitle_label, copyright_label;
     
     private javax.swing.JTextField username_field;
     
@@ -34,7 +34,7 @@ class App extends javax.swing.JFrame implements java.awt.event.ActionListener
     
         this.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
         
-        // if (this.isResizable()) this.setResizable(false);
+        this.setResizable(true);
         
         this.setBounds(50,50,500,500);
         
@@ -42,11 +42,39 @@ class App extends javax.swing.JFrame implements java.awt.event.ActionListener
         
         this.setTitle("https://github.com/MayankDevil/");
         
+            //  header section ---
+        
+            header_panel = new javax.swing.JPanel();
+            
+            // header_panel.setSize(300,400);
+            
+            header_panel.setBackground(java.awt.Color.WHITE);
+            
+                titleLayout();
+                
+                // subtitleLayout();
+                
+            header_panel.add(title_label);
+            
+            // header_panel.add(subtitle_label);
+        
+            // footer section ---
+        
+            footer_panel = new javax.swing.JPanel();
+            
+            footer_panel.setBackground(java.awt.Color.WHITE);
+            
+                copyrightLayout();
+                
+            footer_panel.add(copyright_label);
+            
+            // center section ---
+        
             center_panel = new javax.swing.JPanel();
             
             center_panel.setLayout(null);
             
-            center_panel.setBackground(java.awt.Color.white);
+            center_panel.setBackground(java.awt.Color.WHITE);
             
                 inputLayout();
                 
@@ -65,8 +93,12 @@ class App extends javax.swing.JFrame implements java.awt.event.ActionListener
             center_panel.add(login_button);
             
             center_panel.add(verified_label);
-            
-        this.add(center_panel);   
+        
+        this.add(header_panel, java.awt.BorderLayout.NORTH);
+        
+        this.add(center_panel, java.awt.BorderLayout.CENTER);
+        
+        this.add(footer_panel, java.awt.BorderLayout.SOUTH);
     }
     
     /*
@@ -90,7 +122,68 @@ class App extends javax.swing.JFrame implements java.awt.event.ActionListener
             style = java.awt.Font.PLAIN;
         }            
         return new java.awt.Font("-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans,Liberation Sans, sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji",style,size);
-    } 
+    }
+    
+    /*
+        -------------------------------------------
+        | titleLayout function : set title layout |
+        -------------------------------------------
+    */
+    
+    void titleLayout()
+    {
+        title_label = new javax.swing.JLabel("Admin Login");
+                
+        title_label.setBounds(100,0,300,300);
+        
+        title_label.setFont(myFont(2,20));
+        
+        // title_label.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        
+        title_label.setForeground(java.awt.Color.BLACK);
+        
+        title_label.setBackground(java.awt.Color.WHITE);
+        
+        title_label.setOpaque(true);
+    }
+    
+    /*
+        ---------------------------------------------------------
+        | copyrightLayout function : set CopyRight label layout |
+        ---------------------------------------------------------
+    */
+    
+    void subtitleLayout()
+    {
+        subtitle_label = new javax.swing.JLabel("I am waiting for write something improtant or resonable");
+                
+        // copyright_label.setBounds(100,0,300,300);
+        
+        subtitle_label.setFont(myFont(3,12));
+        
+        subtitle_label.setForeground(java.awt.Color.decode(secondary));
+        
+        subtitle_label.setBackground(java.awt.Color.WHITE);
+    }
+    
+    /*
+        ---------------------------------------------------------
+        | copyrightLayout function : set CopyRight label layout |
+        ---------------------------------------------------------
+    */
+    
+    void copyrightLayout()
+    {
+        copyright_label = new javax.swing.JLabel("All Right Reserved | Developed by Mayank");
+                
+        // copyright_label.setBounds(100,0,300,300);
+        
+        copyright_label.setFont(myFont(2,12));
+        
+        copyright_label.setForeground(java.awt.Color.decode(secondary));
+        
+        copyright_label.setBackground(java.awt.Color.WHITE);
+    }
     
     /*
         ------------------------------------------------------
@@ -100,6 +193,8 @@ class App extends javax.swing.JFrame implements java.awt.event.ActionListener
     
     void inputLayout()
     {
+        // username ---
+        
         username_label = new javax.swing.JLabel("Enter Username :");
                 
         username_label.setBounds(100,20,300,30);
@@ -110,7 +205,11 @@ class App extends javax.swing.JFrame implements java.awt.event.ActionListener
         
         username_field.setBounds(100,60,300,30);
         
+        username_field.setFont(myFont(3,12));
+        
         username_field.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.decode(border_focus),3));
+        
+        // password ---
         
         password_label = new javax.swing.JLabel("Enter Password :");
         
@@ -121,6 +220,8 @@ class App extends javax.swing.JFrame implements java.awt.event.ActionListener
         password_field = new javax.swing.JPasswordField();
         
         password_field.setBounds(100,150,300,30);
+        
+        password_field.setFont(myFont(3,12));
         
         password_field.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.decode(border_focus),3));
     }
@@ -160,7 +261,7 @@ class App extends javax.swing.JFrame implements java.awt.event.ActionListener
     {
         verified_label = new javax.swing.JLabel();
                 
-        verified_label.setBounds(100,270,300,50);
+        verified_label.setBounds(100,280,300,50);
         
         verified_label.setText("");
         
