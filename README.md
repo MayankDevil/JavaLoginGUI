@@ -24,7 +24,7 @@
 
 #### Project Look & Feel
 
-![NETWORK_ERROR](./lib/img/loginForm.png)
+![NETWORK_ERROR](./lib/img/version4.png)
 
 #### Theme
 
