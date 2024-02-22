@@ -10,7 +10,8 @@ class Admin
         {
             admin.put("Alisha","null@void");
             admin.put("Mayank","root@Kali");
-            admin.put("Devil","wliz1gm");
+            admin.put("Devil","12345678");
+            admin.put("SuperUser","access");
         }
     }
     
